@@ -2,6 +2,7 @@ package demoqa.tests;
 
 import demoqa.models.AddBookModel;
 import demoqa.models.LoginResponseModel;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import static demoqa.tests.TestData.credentials;
@@ -10,6 +11,7 @@ import static io.qameta.allure.Allure.step;
 public class DeleteOneBookTest extends BaseTest {
 
     @Test
+    @DisplayName("Проверка удаления товара из списка")
     void deleteBook() {
         String isbn = "9781491904244";
 
@@ -24,7 +26,7 @@ public class DeleteOneBookTest extends BaseTest {
         step("Удалить книгу из профиля", () ->
                 bookApi.deleteBook(loginResponse, isbn));
 
-        step("Открыть UI и убедиться, что книга отсутствует", () -> {
+        step("Открыть UI и проверить, что книга отсутствует", () -> {
             profile.setCookie(loginResponse)
                     .openProfile()
                     .checkExistenceOfBook(isbn);
